@@ -1,0 +1,131 @@
+Next line:  return
+Next page:  space bar
+Previous page:  w
+Quit viewing the diff:  q
+Help:  h
+----------------------------------------------------------------------
+git --version
+----------------------------------------------------------------------
+git init
+----------------------------------------------------------------------
+git clone <url>
+----------------------------------------------------------------------
+git status
+----------------------------------------------------------------------
+git log
+git log --oneline
+git log --stat
+git log --patch (-p)
+git log --decorate (show Tags and branches)
+----------------------------------------------------------------------
+git show <SHA>
+----------------------------------------------------------------------
+git add (file name or . for all files) 
+git commit or commit -m <desc> to ignore text editor to open
+git commit --amend (modify the last commit)
+git diff (show changes that have not yet been committed)
+----------------------------------------------------------------------
+create .gitignore and add files names to be ignored
+----------------------------------------------------------------------
+git tag -a (add a tag to the most recent commit)
+git tag -d (--delete tag)
+git tag -a v1.0 a87984 (add tag to a past commit a87984)
+----------------------------------------------------------------------
+git branch (show all branches)
+git branch <name_of_new_branch> (creat a new branch)
+git checkout <name_of_new_branch> (switch between branches)
+git branch <name_of_new_branch> 42a69f (will create branch and have it point
+                                        to the commit with SHA 42a69f)
+git branch -d <name_of_new_branch> (Delete a branch)
+git branch -D <name_of_new_branch> (force deletion)
+
+----------------------------------------------------------------------
+#There are two types of merges:#################################
+#                                                              #
+#   *Fast-forward merge – the branch being merged in must be   #
+#   ahead of the checked out branch. The checked out branch's  #
+#   pointer will just be moved forward to point to the same    #
+#   commit as the other branch.                                #
+#   *the regular type of merge                                 #
+#       two divergent branches are combined                    #
+#        a merge commit is created                             #
+################################################################
+
+git merge <other_branch>
+git reset --hard HEAD^ (undo the merge)
+
+##################################################################
+#Merge Conflict Recap                                            #
+#                                                                #
+#A merge conflict happens when the same line or lines have been  #
+#changed on different branches that are being merged. Git will   #
+#pause mid-merge telling you that there is a conflict and will   #
+#tell you in what file or files the conflict occurred.           #
+#To resolve the conflict in a file:                              #
+#                                                                #
+#    locate and remove all lines with merge conflict indicators  #
+#   determine what to keep                                       #
+#   save the file(s)                                             #
+#   stage the file(s)                                            #
+#   make a commit                                                #
+#                                                                #
+#Be careful that a file might have merge conflicts in multiple   #
+#parts of the file, so make sure you check the entire file for   #
+#merge conflict indicators - a quick search for <<< should help  #
+#you locate all of them.                                         #
+##################################################################
+----------------------------------------------------------------------
+git revert <SHA-of-commit-to-revert>
+# This command:####################################################
+#                                                                 #
+#    will undo the changes that were made by the provided commit  #
+#    creates a new commit to record the change                    #
+###################################################################
+-------------------------------------------------------------------
+git reset HEAD^ ou HEAD ~
+git reset --mixed HEAD^ (move commit to working directory)
+git reset --soft HEAD^ (move commit to the staging)
+git reset --hard HEAD^ (erase commit - to trash -)
+-------------------------------------------------------------------
+git remote add
+git push origin master
+*** git pull origin master (= fetch + merge)
+git fetch origin master
+-------------------------------------------------------------------
+git shortlog (see how many commits each contributor has added)
+git shortlog (displays an alphabetical list of names and the commit messages)
+git shortlog -s (show only name and commit number)
+git shortlog -s -n (order then alphabetical)
+git log --author=Surma (see only author commits)
+git show 5966b66 (show a specific commit)
+git log --grep "fort" (display only the commits that have "fort")
+-------------------------------------------------------------------
+Recap
+
+When working with a project that you've forked. 
+The original project's maintainer will continue adding changes to their project.
+You'll want to keep your fork of their project in sync with theirs so that you can include any changes they make.
+
+To get commits from a source repository into your forked repository on GitHub you need to:
+
+    get the cloneable URL of the source repository
+    create a new remote with the git remote add command
+        use the shortname upstream to point to the source repository
+        provide the URL of the source repository
+    fetch the new upstream remote
+    merge the upstream's branch into a local branch
+    push the newly updated local branch to your origin repo
+--------------------------------------------------------------------
+Recap
+
+As simple as at may seem, working on an active pull request is mostly about communication!
+
+If the project's maintainer is requesting changes to the pull request, then:
+
+    make any necessary commits on the same branch in your local repository that your pull request is based on
+    push the branch to the your fork of the source repository
+
+The commits will then show up on the pull request page.
+--------------------------------------------------------------------
+git rebase -i HEAD~3 (squash 3 commits)
+git push -f (force pushing)
